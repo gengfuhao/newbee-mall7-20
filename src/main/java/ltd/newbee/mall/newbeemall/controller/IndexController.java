@@ -15,10 +15,29 @@ public class IndexController {
 	@Resource
 	private NewBeeMallIndexConfigService newBeeMallIndexConfigService;
 
-	@GetMapping("/newGoods")
+	/*
+	 * @GetMapping("/newGoods")
+	 * 
+	 * @ResponseBody public Result getNewGoods() {
+	 * 
+	 * return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.
+	 * getConfigGoodsesForIndex(4, 5)); }
+	 * 
+	 * 
+	 * @GetMapping("/recommendGoodses")
+	 * 
+	 * @ResponseBody public Result getCommendGoodses() {
+	 * 
+	 * return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.
+	 * getConfigGoodsesForIndex(5, 5)); }
+	 */
+	
+	@GetMapping("/Goodses")
     @ResponseBody
-    public Result hello() {
+    public Result getGoodses(int configType) {
 
-        return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.getConfigGoodsesForIndex(3, 5));
+        return ResultGenerator.genSuccessResult(newBeeMallIndexConfigService.getConfigGoodsesForIndex(configType, 5));
     }
+	
 }
+

@@ -36,4 +36,22 @@
 		order by config_rank desc
 		limit #{number}
 	</select>
+	
+	<select id="selectByPrimarKeys"
+		resultMap="GoodsInfoBaseResultMap">
+		select *
+		from tb_newbee_mall_goods_info
+		where goods_id in 
+		<foreach collection="list" item="id" >separator="," open="(" close=")">
+         #{id}
+		</foreach>
+		order by field (goods_id,
+		<foreach collection="list" item="id" >separator="," open="(" close=")">
+         #{id}
+         </foreach>
+		);
+
+	</select>
+	
+	
 </mapper> 
