@@ -25,33 +25,91 @@
 			property="updateUser" />
 	</resultMap>
 
+	<resultMap id="GoodsInfoBaseResultMap"
+		type="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		<id column="goods_id" jdbcType="BIGINT" property="goodsId" />
+		<result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+		<result column="goods_intro" jdbcType="VARCHAR"
+			property="goodsIntro" />
+		<result column="goods_category_id" jdbcType="BIGINT"
+			property="goodsCategoryId" />
+		<result column="goods_cover_img" jdbcType="VARCHAR"
+			property="goodsCoverImg" />
+		<result column="goods_carousel" jdbcType="VARCHAR"
+			property="goodsCarousel" />
+		<result column="original_price" jdbcType="INTEGER"
+			property="originalPrice" />
+		<result column="selling_price" jdbcType="INTEGER"
+			property="sellingPrice" />
+		<result column="stock_num" jdbcType="INTEGER"
+			property="stockNum" />
+		<result column="tag" jdbcType="VARCHAR" property="tag" />
+		<result column="goods_sell_status" jdbcType="TINYINT"
+			property="goodsSellStatus" />
+		<result column="create_user" jdbcType="INTEGER"
+			property="createUser" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="update_user" jdbcType="INTEGER"
+			property="updateUser" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+	</resultMap>
+
+	 <resultMap id="CategoryBaseResultMap"
+		type="ltd.newbee.mall.newbeemall.entity.NewBeeMallIndexCategory">
+		<id column="category_id" jdbcType="BIGINT" property="categoryId" />
+		<result column="category_level" jdbcType="TINYINT" property="categoryLevel" />
+		<result column="parent_id" jdbcType="BIGINT" property="parentId" />
+		<result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+		<result column="category_rank" jdbcType="INTEGER" property="categoryRank" />
+		<result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="create_user" jdbcType="INTEGER" property="createUser" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="update_user" jdbcType="INTEGER" property="updateUser" />
+	</resultMap> 
+
+
 	<select id="findIndexConfigsByTypeAndNum"
 		resultMap="BaseResultMap">
 		select
-		config_id, config_name, config_type, goods_id, redirect_url, config_rank,
+		config_id, config_name, config_type, goods_id,
+		redirect_url, config_rank,
 		is_deleted,
-		create_time, create_user, update_time, update_user
+		create_time, create_user,
+		update_time, update_user
 		from tb_newbee_mall_index_config
-		where config_type = #{configType} and is_deleted = 0
-		order by config_rank desc
+		where
+		config_type = #{configType} and is_deleted = 0
+		order by config_rank
+		desc
 		limit #{number}
 	</select>
-	
+
 	<select id="selectByPrimarKeys"
 		resultMap="GoodsInfoBaseResultMap">
 		select *
 		from tb_newbee_mall_goods_info
-		where goods_id in 
-		<foreach collection="list" item="id" >separator="," open="(" close=")">
-         #{id}
+		where goods_id in
+		<foreach collection="list" index="index" item="item"
+			separator="," open="(" close=")">
+			#{item}
 		</foreach>
 		order by field (goods_id,
-		<foreach collection="list" item="id" >separator="," open="(" close=")">
-         #{id}
-         </foreach>
-		);
-
+		<foreach collection="list" index="index" item="item"
+			separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
-	
-	
+
+
+	<select id="indexCategory" resultMap="CategoryBaseResultMap">
+	select *
+	from tb_newbee_mall_goods_category
+	where category_level = 1;
+	order by category_rank desc
+	</select>
+
+
 </mapper> 
