@@ -52,11 +52,5 @@ public class NewBeeMallIndexConfigServiceImpl implements NewBeeMallIndexConfigSe
 
 		return voList;
 	}
-	
-	@Override
-	public List<NewBeeMallIndexCategoryVO> getCategoriesForIndex(){
-		List<NewBeeMallIndexCategoryVO> indexCategoryVO = new ArrayList<>();
-		
-		return null;
-	}
+
 }

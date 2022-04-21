@@ -13,6 +13,5 @@ public interface IndexConfigMapper {
 	List<IndexConfig> findIndexConfigsByTypeAndNum(@Param("configType") int configType, @Param("number") int number);
 
 	List<NewBeeMallGoods> selectByPrimarKeys(List<Long> goods_id);
-	
-	List<GoodsCategory> indexCategory(List<Long> category_id);
+
 } 

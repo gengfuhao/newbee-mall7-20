@@ -6,13 +6,16 @@
  * Copyright (c) 2019-2020 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-
-package ltd.newbee.mall.newbeemall.service;
+package ltd.newbee.mall.newbeemall.dao;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.vo.NewBeeMallIndexCategoryVO;
+import org.apache.ibatis.annotations.Param;
 
-public interface NewBeeMallCategoryService {
-	List<NewBeeMallIndexCategoryVO> getCategoriesForIndex();
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
+
+public interface GoodsCategoryMapper {
+
+	List<GoodsCategory> selectByLevelAndParentIdsAndNumber(@Param("parentIds") List<Long> parentIds,
+			@Param("categoryLevel") int categoryLevel, @Param("number") int number);
 }
