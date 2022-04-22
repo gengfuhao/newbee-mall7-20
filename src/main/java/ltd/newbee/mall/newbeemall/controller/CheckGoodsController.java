@@ -20,6 +20,9 @@ public class CheckGoodsController {
     @ResponseBody
     public Result getCheckGoods(int userId) {
 
-        return ResultGenerator.genSuccessResult(NewBeeMallCheckGoodsService.getCheckGoodsesForIndex(userId,6));
+        return ResultGenerator.genSuccessResult(newBeeMallCheckGoodsService.getCheckGoodsesForIndex(userId,6));
     }
+	//失败时候，可以在controller当中调用ResultGenerator.genFailResult来返回error
+	
 }
+

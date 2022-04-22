@@ -5,5 +5,5 @@ import java.util.List;
 import ltd.newbee.mall.newbeemall.vo.NewBeeMallGoodsDetailVO;
 
 public interface NewBeeMallCheckGoodsService {
-	List<NewBeeMallGoodsDetailVO> getCheckGoodsesForIndex(int userId ,int number);
+	List<NewBeeMallGoodsDetailVO> getCheckGoodsesForIndex(long userId ,int number);
 }

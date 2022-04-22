@@ -5,19 +5,19 @@
 	
 	<resultMap id="BaseResultMap"
 		type="ltd.newbee.mall.newbeemall.entity.CheckGoods">
-		<id column="userId" jdbcType="INTEGER" property="userId" />
-		<id column="goods_id" jdbcType="VARCHAR" property="goodsId" />
-		<result column="check_date" jdbcType="INTEGER" property="checkDate" />
+		<id column="userId" jdbcType="BIGINT" property="userId" />
+		<id column="goods_id" jdbcType="BIGINT" property="goodsId" />
+		<id column="check_date" jdbcType="TIMESTAMP" property="checkDate" />
 	</resultMap>
 	
 	
 	<select id="findCheckGoodsByUserId"
 		resultMap="BaseResultMap">
-		select *
-		from rescent_check_goods
-		where user_id =
-		#{userId,jdbcType=BIGINT}
-		order by check_date desc
-		limit #{number}
+		SELECT user_id,goods_id,check_date
+		FROM rescent_check_goods
+		WHERE user_id = #{userId,jdbcType=BIGINT}
+		GROUP BY user_id,goods_id
+		ORDER BY count(check_date) desc
+		LIMIT #{number};
 	</select>
 </mapper>

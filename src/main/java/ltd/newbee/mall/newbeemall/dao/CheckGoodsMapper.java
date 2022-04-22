@@ -8,5 +8,5 @@ import ltd.newbee.mall.newbeemall.entity.CheckGoods;
 
 public interface CheckGoodsMapper {
 
-	List<CheckGoods> findCheckGoodsByUserId(@Param("userId") int userId, @Param("number") int number);
+	List<CheckGoods> findCheckGoodsByUserId(@Param("userId") long userId, @Param("number") int number);
 }
