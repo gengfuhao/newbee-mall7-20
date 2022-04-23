@@ -68,7 +68,12 @@ public class IndexController {
 			//return ResultGenerator.genSuccessResult("success");
 			
 			//List<NewBeeMallGoodsDetailVO> voList = newBeeMallCheckGoodsService.getCheckGoodsesForIndex(userId,6);
-			return ResultGenerator.genSuccessResult(newBeeMallCheckGoodsService.getCheckGoodsesForIndex(userId,6));
+			//分两步做
+			//return ResultGenerator.genSuccessResult(newBeeMallCheckGoodsService.getCheckGoodsesForIndex(userId,6));
+			
+			//用表连接 join
+			return ResultGenerator.genSuccessResult(newBeeMallCheckGoodsService.getRescentCheckGoodsesForIndex(userId,6));
+			
 		}
 
 		//方法2

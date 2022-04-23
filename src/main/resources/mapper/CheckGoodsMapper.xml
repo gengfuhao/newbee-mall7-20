@@ -13,11 +13,25 @@
 	
 	<select id="findCheckGoodsByUserId"
 		resultMap="BaseResultMap">
-		SELECT user_id,goods_id,check_date
+		SELECT user_id,goods_id,count(check_date)
 		FROM rescent_check_goods
 		WHERE user_id = #{userId,jdbcType=BIGINT}
 		GROUP BY user_id,goods_id
 		ORDER BY count(check_date) desc
 		LIMIT #{number};
 	</select>
+	
+	<select id="findRescentCheckGoodsByJoin" 
+		resultType="ltd.newbee.mall.newbeemall.entity.NewBeeMallGoods">
+		SELECT info.*
+		FROM rescent_check_goods AS r
+		JOIN tb_newbee_mall_goods_info AS info
+		ON r.goods_id= info.goods_id
+		WHERE user_id = #{userId,jdbcType=BIGINT}
+		GROUP BY user_id,goods_id
+		ORDER BY count(check_date) desc
+		LIMIT #{number};
+	</select>
+	
+	
 </mapper>
