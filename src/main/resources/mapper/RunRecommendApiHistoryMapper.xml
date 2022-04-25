@@ -5,10 +5,24 @@
 
 	<insert id="insertRunRecommendApiHistory">
 		insert into run_recommend_api_history (user_id,category_id,run_date)
-		values 
+		values
 		<foreach item="item" collection="list" separator=",">
-	    	(#{item.userId}, #{item.categoryId}, #{item.runDate})
-	 	 </foreach>
+			(#{item.userId}, #{item.categoryId}, #{item.runDate})
+		</foreach>
 	</insert>
+
+	<select id="selectRescentCategoryId" resultType="ltd.newbee.mall.newbeemall.entity.RunRecommendApiHistory">
+		select distinct cat2.category_id,chk.user_id
+		from tb_newbee_mall_goods_info as info1
+		join tb_newbee_mall_goods_info as info2
+		on info2.goods_category_id = info1.goods_category_id
+		join rescent_check_goods as chk
+		on chk.goods_id = info2.goods_id
+		join tb_newbee_mall_goods_category as cat2
+		on info1.goods_category_id = cat2.category_id
+		left join run_recommend_api_history as hi
+		on cat2.category_id = hi.category_id
+		where hi.category_id is null
+	</select>
 
 </mapper>

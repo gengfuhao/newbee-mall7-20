@@ -1,5 +1,6 @@
 package ltd.newbee.mall.newbeemall.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,13 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ltd.newbee.mall.newbeemall.entity.MallUser;
+import ltd.newbee.mall.newbeemall.entity.RunRecommendApiHistory;
 import ltd.newbee.mall.newbeemall.service.CheckUserExistsService;
 import ltd.newbee.mall.newbeemall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.newbeemall.service.NewBeeMallCheckGoodsService;
 import ltd.newbee.mall.newbeemall.service.NewBeeMallIndexConfigService;
+import ltd.newbee.mall.newbeemall.service.RunRecommendApiHistoryService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
-import ltd.newbee.mall.newbeemall.vo.NewBeeMallGoodsDetailVO;
 
 @Controller
 public class IndexController {
@@ -30,6 +32,9 @@ public class IndexController {
 	
 	@Resource
 	private NewBeeMallCheckGoodsService newBeeMallCheckGoodsService;
+	
+	@Resource
+	private RunRecommendApiHistoryService runRecommendApiHistoryService;
 
 	/*
 	 * @GetMapping("/newGoods")
@@ -81,10 +86,23 @@ public class IndexController {
 		* int count = checkUserExistsService.checkUserExistsReturnCount(userId);
 		* if(count == 0 ) { return ResultGenerator.genFailResult("failed");
 		*/
-					
-		
     }
 	
 	
+	@GetMapping("/runRecommendApi")
+    @ResponseBody
+    public Result runRecommendApi() {
+		List<RunRecommendApiHistory> list = runRecommendApiHistoryService.selectRescentCategoryId();
+		for(RunRecommendApiHistory run : list) {
+			run.setRunDate(new Date());
+		}
+		int count = runRecommendApiHistoryService.insertRunRecommendApiHistory(list);
+		
+		if(count == 0 ) { 
+			return ResultGenerator.genFailResult("failed");
+		}else {
+			return ResultGenerator.genSuccessResult("successed");
+		}
+	}
+	
 }
-
