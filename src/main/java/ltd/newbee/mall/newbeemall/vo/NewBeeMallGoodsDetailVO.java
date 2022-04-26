@@ -9,6 +9,9 @@
 	package ltd.newbee.mall.newbeemall.vo;
 
 	import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 	/**
 	 * 商品详情页VO
@@ -30,6 +33,22 @@
 	    private Integer originalPrice;
 
 	    private String goodsDetailContent;
+	    
+	    private Integer stockNum;
+		
+		private String tag;
+		
+		private Byte goodsSellStatus;
+		
+		private Integer createUser;
+		
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+		private Date createTime;
+
+		private Integer updateUser;
+
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+		private Date updateTime;
 
 	    public Long getGoodsId() {
 	        return goodsId;
@@ -95,4 +114,59 @@
 	        this.goodsCarouselList = goodsCarouselList;
 	    }
 
+	    public Integer getStockNum() {
+			return stockNum;
+		}
+
+		public void setStockNum(Integer stockNum) {
+			this.stockNum = stockNum;
+		}
+
+		public String getTag() {
+			return tag;
+		}
+
+		public void setTag(String tag) {
+			this.tag = tag;
+		}
+
+		public Byte getGoodsSellStatus() {
+			return goodsSellStatus;
+		}
+
+		public void setGoodsSellStatus(Byte goodsSellStatus) {
+			this.goodsSellStatus = goodsSellStatus;
+		}
+
+		public Integer getCreateUser() {
+			return createUser;
+		}
+
+		public void setCreateUser(Integer createUser) {
+			this.createUser = createUser;
+		}
+
+		public Date getCreateTime() {
+			return createTime;
+		}
+
+		public void setCreateTime(Date createTime) {
+			this.createTime = createTime;
+		}
+
+		public Integer getUpdateUser() {
+			return updateUser;
+		}
+
+		public void setUpdateUser(Integer updateUser) {
+			this.updateUser = updateUser;
+		}
+
+		public Date getUpdateTime() {
+			return updateTime;
+		}
+
+		public void setUpdateTime(Date updateTime) {
+			this.updateTime = updateTime;
+		}
 }

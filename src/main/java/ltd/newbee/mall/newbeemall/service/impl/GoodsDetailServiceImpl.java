@@ -32,29 +32,52 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 			vo.setColor(entity.getColor());
 			vo.setMaterial(entity.getMaterial());
 			
-			if(entity.getSize3() == null) {
-				vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
-						  +entity.getSize2Name()+entity.getSize2()
-						  +entity.getSizeUnit());
-			}else if(entity.getSize3()>0 &&entity.getSize4() == null) {
-			vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
-					  +entity.getSize2Name()+entity.getSize2()+"x"
-					  +entity.getSize3Name()+entity.getSize3()
-					  +entity.getSizeUnit());
-			}else if(entity.getSize4()>0 && entity.getSize5() == null) {
-				vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
-						  +entity.getSize2Name()+entity.getSize2()+"x"
-						  +entity.getSize3Name()+entity.getSize3()+"x"
-						  +entity.getSize4Name()+entity.getSize4()
-						  +entity.getSizeUnit());
-			}else if(entity.getSize5()>0) {
-				vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
-						  +entity.getSize2Name()+entity.getSize2()+"x"
-						  +entity.getSize3Name()+entity.getSize3()+"x"
-						  +entity.getSize4Name()+entity.getSize4()+"x"
-						  +entity.getSize5Name()+entity.getSize5()
-						  +entity.getSizeUnit());
+			String size = "";
+			if(entity.getSize1() !=null && entity.getSize1()!=0) {
+				size = entity.getSize1Name()+entity.getSize1();
+				}
+			if(entity.getSize2() !=null && entity.getSize2()!=0) {
+				size = size + "x" + entity.getSize2Name()+entity.getSize2();
+				}
+			if(entity.getSize3() !=null && entity.getSize3()!=0) {
+				size = size + "x" + entity.getSize3Name()+entity.getSize3();
+				}
+			if(entity.getSize4() !=null && entity.getSize4()!=0) {
+				size = size + "x" + entity.getSize4Name()+entity.getSize4();
+				}
+			if(entity.getSize5() !=null && entity.getSize5()!=0) {
+				size = size + "x" + entity.getSize5Name()+entity.getSize5();
+				}
+			if(entity.getSizeUnit() != null && !entity.getSizeUnit().equals("")) {
+				size = size + entity.getSizeUnit();
 			}
+			vo.setSize(size);
+				
+			
+			/*if(entity.getSize3() == null) {
+			*	vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
+			*			  +entity.getSize2Name()+entity.getSize2()
+			*			  +entity.getSizeUnit());
+			*}else if(entity.getSize3()>0 &&entity.getSize4() == null) {
+			*vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
+			*		  +entity.getSize2Name()+entity.getSize2()+"x"
+			*		  +entity.getSize3Name()+entity.getSize3()
+			*		  +entity.getSizeUnit());
+			*}else if(entity.getSize4()>0 && entity.getSize5() == null) {
+			*	vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
+			*			  +entity.getSize2Name()+entity.getSize2()+"x"
+			*			  +entity.getSize3Name()+entity.getSize3()+"x"
+			*			  +entity.getSize4Name()+entity.getSize4()
+			*			  +entity.getSizeUnit());
+			*}else if(entity.getSize5()>0) {
+			*	vo.setSize(entity.getSize1Name()+entity.getSize1()+"x"
+			*			  +entity.getSize2Name()+entity.getSize2()+"x"
+			*			  +entity.getSize3Name()+entity.getSize3()+"x"
+			*			  +entity.getSize4Name()+entity.getSize4()+"x"
+			*			  +entity.getSize5Name()+entity.getSize5()
+			*			  +entity.getSizeUnit());
+			}*/
+				
 			vo.setWarranty(entity.getWarranty()+entity.getWarrantyUnit());
 			
 			if (entity.getWrapSize4()==null) {
