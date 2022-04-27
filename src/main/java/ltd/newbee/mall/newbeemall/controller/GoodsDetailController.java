@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ltd.newbee.mall.newbeemall.service.GoodsDetailService;
 import ltd.newbee.mall.newbeemall.service.GoodsImageService;
 import ltd.newbee.mall.newbeemall.service.GoodsInfoService;
+import ltd.newbee.mall.newbeemall.service.GoodsQuestionAndAnswerService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
@@ -22,14 +23,16 @@ public class GoodsDetailController {
 	private GoodsImageService goodsImageService;
 	
 	@Resource
-	GoodsInfoService goodsInfoService;
+	private GoodsInfoService goodsInfoService;
+	
+	@Resource
+	private GoodsQuestionAndAnswerService goodsQuestionAndAnswerService;
 	
 	@GetMapping("/goodsDetail")
     @ResponseBody
     public Result getgoodsDetail(long goodsId) {
         return ResultGenerator.genSuccessResult(goodsDetailService.findGoodsDetailsByGoodsId(goodsId));
     }
-	
 	
 	@GetMapping("/goodsImages")
     @ResponseBody
@@ -42,4 +45,10 @@ public class GoodsDetailController {
     public Result goodsInfo(long goodsId) {
         return ResultGenerator.genSuccessResult(goodsInfoService.getGoodsInfo(goodsId));
     }
+	
+	@GetMapping("/goodsQA")
+    @ResponseBody
+    public Result goodsQA(int pageNo,int number,long goodsId) {
+        return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo,number,goodsId));
+	}
 }

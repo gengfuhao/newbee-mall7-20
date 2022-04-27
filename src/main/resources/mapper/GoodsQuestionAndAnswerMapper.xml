@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.GoodsQuestionAndAnswerMapper">
+	<select id="findGoodsQAByGoodsId"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsQuestionAndAnswer">
+		SELECT a.goods_id,question_contents,question_date,
+		answer_contents,answer_date,count(li.user_id) AS count
+		FROM answers as a Join questions as q
+		ON a.question_id = q.question_id
+		LEFT JOIN qa_like as li
+		ON a.answer_id = li.answer_id
+		WHERE a.goods_id = #{goodsId}
+		GROUP BY li.answer_id
+		ORDER BY count(li.user_id) DESC, answer_date DESC
+		limit #{start},#{number}
+	</select>
+
+	<select id="findGoodsQANumberAndPage" parameterType = "long"
+		resultType="int">
+		SELECT COUNT(answer_id) AS totalCount
+		FROM answers
+		WHERE a.goods_id = #{goodsId}
+	</select>
+</mapper>
