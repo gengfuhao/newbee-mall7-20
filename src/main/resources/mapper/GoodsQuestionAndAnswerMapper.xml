@@ -12,14 +12,14 @@
 		ON a.answer_id = li.answer_id
 		WHERE a.goods_id = #{goodsId}
 		GROUP BY li.answer_id
-		ORDER BY count(li.user_id) DESC, answer_date DESC
-		limit #{start},#{number}
+		ORDER BY ${orderByCol} DESC
+		LIMIT #{start},#{number}
 	</select>
 
 	<select id="findGoodsQANumberAndPage" parameterType = "long"
 		resultType="int">
-		SELECT COUNT(answer_id) AS totalCount
+		SELECT COUNT(*) AS totalCount
 		FROM answers
-		WHERE a.goods_id = #{goodsId}
+		WHERE goods_id = #{goodsId}
 	</select>
 </mapper>

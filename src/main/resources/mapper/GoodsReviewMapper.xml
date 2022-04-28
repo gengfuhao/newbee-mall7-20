@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.GoodsReviewMapper">
+	<select id="findGoodsReviewByGoodsId"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		SELECT
+		re.review_id,rating,nick_name,review_date,goods_name,
+		title,content,photo1,photo2,photo3,photo4,photo5,
+		count(li.review_id) AS count
+		FROM review AS re 
+		JOIN tb_newbee_mall_order_item as item
+		ON re.order_id=item.order_id
+		LEFT JOIN review_like AS li
+		ON re.review_id=li.review_id
+		WHERE item.goods_id=#{goodsId} AND proved=0
+		GROUP BY re.review_id
+		ORDER BY rating DESC;
+		LIMIT #{start},#{number}
+	</select>
+
+</mapper>

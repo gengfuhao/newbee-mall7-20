@@ -11,6 +11,7 @@ import ltd.newbee.mall.newbeemall.service.GoodsDetailService;
 import ltd.newbee.mall.newbeemall.service.GoodsImageService;
 import ltd.newbee.mall.newbeemall.service.GoodsInfoService;
 import ltd.newbee.mall.newbeemall.service.GoodsQuestionAndAnswerService;
+import ltd.newbee.mall.newbeemall.service.GoodsReviewService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
@@ -27,6 +28,9 @@ public class GoodsDetailController {
 	
 	@Resource
 	private GoodsQuestionAndAnswerService goodsQuestionAndAnswerService;
+	
+	@Resource
+	private GoodsReviewService goodsReviewService;
 	
 	@GetMapping("/goodsDetail")
     @ResponseBody
@@ -48,7 +52,13 @@ public class GoodsDetailController {
 	
 	@GetMapping("/goodsQA")
     @ResponseBody
-    public Result goodsQA(int pageNo,int number,long goodsId) {
-        return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo,number,goodsId));
+    public Result goodsQA(int pageNo,int number,long goodsId, String orderByCol) {
+		return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo,number,goodsId,orderByCol));    
+	}
+	
+	@GetMapping("/goodsReview")
+    @ResponseBody
+    public Result getGoodsReview(long goodsId) {
+		return ResultGenerator.genSuccessResult(goodsReviewService.getGoodsReview(goodsId));     
 	}
 }

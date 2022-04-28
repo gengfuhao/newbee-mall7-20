@@ -2,9 +2,8 @@ package ltd.newbee.mall.newbeemall.service;
 
 import java.util.List;
 
-import ltd.newbee.mall.newbeemall.vo.GoodsQuestionAndAnswerVO;
+import ltd.newbee.mall.newbeemall.vo.GoodsQuestionAndAnswerNumberVO;
 
 public interface GoodsQuestionAndAnswerService {
-	List<GoodsQuestionAndAnswerVO> getGoodsQA(int pageNo, int number,long goodsId);
-
+	List<GoodsQuestionAndAnswerNumberVO> getGoodsQA(int pageNo, int number,long goodsId,String orderByCol);
 }
