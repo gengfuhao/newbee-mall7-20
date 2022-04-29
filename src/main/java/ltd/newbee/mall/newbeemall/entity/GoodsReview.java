@@ -5,11 +5,21 @@ import java.util.Date;
 import javax.annotation.Generated;
 
 public class GoodsReview {
+	private Long goodsId;
+	
 	private String goodsName;
 	
-	private Integer count;
-	
-	 public String getGoodsName() {
+	private Integer count;	
+
+	public Long getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(Long goodsId) {
+		this.goodsId = goodsId;
+	}
+
+	public String getGoodsName() {
 		return goodsName;
 	}
 

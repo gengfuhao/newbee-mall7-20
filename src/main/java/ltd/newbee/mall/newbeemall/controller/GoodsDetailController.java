@@ -58,7 +58,9 @@ public class GoodsDetailController {
 	
 	@GetMapping("/goodsReview")
     @ResponseBody
-    public Result getGoodsReview(long goodsId) {
-		return ResultGenerator.genSuccessResult(goodsReviewService.getGoodsReview(goodsId));     
+    public Result getGoodsReview(long start,long number,long goodsId) {
+		return ResultGenerator.genSuccessResult(goodsReviewService.getGoodsReview(start,number,goodsId));     
 	}
+
+
 }
