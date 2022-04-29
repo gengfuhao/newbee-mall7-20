@@ -32,10 +32,10 @@ public class GoodsQuestionAndAnswerServiceImpl implements GoodsQuestionAndAnswer
 		int totalCount = goodsQuestionAndAnswerMapper.findGoodsQANumberAndPage(goodsId);
 
 		int totalPage = 0;
-		if (totalCount != 0 && totalCount % number != 0) {
+		if (totalCount % number != 0) {
 			totalPage = (totalCount / number) + 1;
-		} else if (totalCount != 0 && totalCount % number == 0) {
-			totalCount = totalCount / number;
+		} else if (totalCount % number == 0) {
+			totalPage = totalCount / number;
 		}
 		// ->vo
 		List<GoodsQuestionAndAnswerNumberVO> voList = new ArrayList<>();
