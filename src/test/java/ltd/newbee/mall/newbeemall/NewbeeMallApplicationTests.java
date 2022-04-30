@@ -48,26 +48,16 @@ class NewbeeMallApplicationTests {
 	 */
 	
 	
-	  @Test void contextLoads() {
-	  
-	  List<GoodsReview> list = new ArrayList<>();
-	  GoodsReview re1 = new GoodsReview(); 
-	  re1.setReviewId(10l);
-				re1.setOrderId(21l);
-				re1.setGoodsId(10742l);
-				re1.setNickName("user");
-				re1.setRating(5);
-				re1.setTitle("good");
-				re1.setContent("reviewcontent");
-				re1.setPhoto1(null);
-				re1.setPhoto2(null);
-				re1.setPhoto3(null);
-				re1.setPhoto4(null);
-				re1.setPhoto5(null);
-				re1.setReviewDate(new Date());
-				list.add(re1);			
-	  
-	  int cnt = goodsReviewService.insertGoodsReview(list);
-	  assertEquals(1,cnt); 
-	  }	 
+	/*
+	 * @Test void contextLoads() {
+	 * 
+	 * List<GoodsReview> list = new ArrayList<>(); GoodsReview re1 = new
+	 * GoodsReview(); re1.setReviewId(10l); re1.setOrderId(21l);
+	 * re1.setGoodsId(10742l); re1.setNickName("user"); re1.setRating(5);
+	 * re1.setTitle("good"); re1.setContent("reviewcontent"); re1.setPhoto1(null);
+	 * re1.setPhoto2(null); re1.setPhoto3(null); re1.setPhoto4(null);
+	 * re1.setPhoto5(null); re1.setReviewDate(new Date()); list.add(re1);
+	 * 
+	 * int cnt = goodsReviewService.insertGoodsReview(list); assertEquals(1,cnt); }
+	 */
 }

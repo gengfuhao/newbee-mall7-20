@@ -1,12 +1,18 @@
 package ltd.newbee.mall.newbeemall.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ltd.newbee.mall.newbeemall.entity.GoodsReview;
 import ltd.newbee.mall.newbeemall.service.GoodsDetailService;
 import ltd.newbee.mall.newbeemall.service.GoodsImageService;
 import ltd.newbee.mall.newbeemall.service.GoodsInfoService;
@@ -58,9 +64,26 @@ public class GoodsDetailController {
 	
 	@GetMapping("/goodsReview")
     @ResponseBody
-    public Result getGoodsReview(long start,long number,long goodsId) {
-		return ResultGenerator.genSuccessResult(goodsReviewService.getGoodsReview(start,number,goodsId));     
+    public Result getGoodsReview(int rating,long start,long number,long goodsId) {
+		return ResultGenerator.genSuccessResult(goodsReviewService.getGoodsReview(rating,start,number,goodsId));     
 	}
 
+	@GetMapping("/goodsReview/check")
+    @ResponseBody
+    public Result checkGoodsReview(long userId,long goodsId) {
+		List<GoodsReview> entityList = goodsReviewService.checkGoodsReview(goodsId,userId);
+		if(entityList.size()==0) {
+			return ResultGenerator.genFailResult("failed");
+		}else {
+		return ResultGenerator.genSuccessResult("Please enter a review.");
+		}
+	}
+	
+	@PostMapping("/goodsReview/insert")
+    @ResponseBody
+    public Result insertReview(@RequestBody HashMap<String,Object> reviewMap) {
+		
+		return ResultGenerator.genSuccessResult(goodsReviewService.insertGoodsReview(reviewMap));
+	}
 
 }
