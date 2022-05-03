@@ -25,6 +25,7 @@
 		LIMIT #{start},#{number}
 	</select>
 
+	<!--判断是否有未评价的订单-->
 	<select id="checkGoodsReview"
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
 		SELECT item.order_id,item.goods_id,user_id
@@ -39,26 +40,46 @@
 		ON item.order_id=o.order_id
 		WHERE
 		item.goods_id=#{goodsId}
-		AND re.order_id IS NULL
+		AND
+		re.order_id IS NULL
 		AND user_id=#{userId}
 		ORDER BY o.create_time
 	</select>
 
+	<!--插入数据-->
 	<insert id="insertGoodsReview">
 		insert into review
 		(review_id,order_id,goods_id,nick_name,
 		rating,title,content,photo1,photo2,photo3,photo4,photo5,review_date)
 		values
 		(#{reviewId},#{orderId}, #{goodsId}, #{nickName}
-		, #{rating}, #{title}, #{content}, #{photo1}
-		, #{photo2}, #{photo3}, #{photo4},#{photo5},#{reviewDate})
+		, #{rating},
+		#{title}, #{content}, #{photo1}
+		, #{photo2}, #{photo3},
+		#{photo4},#{photo5},#{reviewDate})
 	</insert>
-	
+
 	<select id="findMaxReviewId" resultType="long">
 		SELECT max(review_id)
 		FROM review
 	</select>
 
-
+ 	<!--取rating平均数，总评价件数，和写评价内容的总件数-->
+	<select id="countReviewsAndAverageRating"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		SELECT AVG(rating) AS rating_avg,COUNT(*) AS review_count,
+		COUNT(title) AS title_count
+		FROM review 
+		WHERE proved=0 AND goods_id=#{goodsId};
+	</select>
+	
+		<!--取各个rating的数量-->
+	<select id="countReviewsByRating"
+		resultType="int">
+		SELECT COUNT(rating) AS rating_count 
+		FROM review 
+		WHERE proved=0 AND goods_id=#{goodsId} AND rating=#{rating};
+	</select>
+	
 
 </mapper>

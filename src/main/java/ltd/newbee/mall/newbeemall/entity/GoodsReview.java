@@ -9,7 +9,13 @@ public class GoodsReview {
 	
 	private String goodsName;
 	
-	private Integer count;	
+	private Integer count;
+	
+	private Double ratingAvg;
+	
+	private Integer reviewCount;
+	
+	private Integer titleCount;
 
 	public Long getGoodsId() {
 		return goodsId;
@@ -34,6 +40,33 @@ public class GoodsReview {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
+	
+	
+
+	public Double getRatingAvg() {
+		return ratingAvg;
+	}
+
+	public void setRatingAvg(Double ratingAvg) {
+		this.ratingAvg = ratingAvg;
+	}
+
+	public Integer getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(Integer reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public Integer getTitleCount() {
+		return titleCount;
+	}
+
+	public void setTitleCount(Integer titleCount) {
+		this.titleCount = titleCount;
+	}
+
 
 	@Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-04-28T20:00:59.1301497+09:00", comments="Source field: review.review_id")
 	    private Long reviewId;

@@ -86,4 +86,15 @@ public class GoodsDetailController {
 		return ResultGenerator.genSuccessResult(goodsReviewService.insertGoodsReview(reviewMap));
 	}
 
+	@GetMapping("/goodsReview/countReviews")
+    @ResponseBody
+    public Result countReviews(long goodsId) {
+		return ResultGenerator.genSuccessResult(goodsReviewService.getReviewsCountAndAverage(goodsId));
+	}
+	
+	@GetMapping("/goodsReview/countRating")
+    @ResponseBody
+    public Result countRating(long goodsId,int rating) {
+		return ResultGenerator.genSuccessResult(goodsReviewService.countReviewsByRating(goodsId, rating));
+	}
 }

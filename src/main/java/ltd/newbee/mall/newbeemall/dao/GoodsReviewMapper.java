@@ -13,4 +13,8 @@ public interface GoodsReviewMapper {
 	int insertGoodsReview(Map<String,Object> review);
 	
 	long findMaxReviewId();
+	
+	List<GoodsReview> countReviewsAndAverageRating(long goodsId);
+	
+	int countReviewsByRating(long goodsId, int rating);
 }
