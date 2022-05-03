@@ -16,5 +16,7 @@ public interface GoodsReviewService {
 	
 	List<GoodsReviewCountAndAvgVO> getReviewsCountAndAverage(long goodsId);
 	
-	int countReviewsByRating(long goodsId, int rating);
+	//List<GoodsReview> countReviewsByRating(long goodsId);
+	
+	//Map<String,Integer> countReviewsHashMap(Map<String,Integer> map);
 }
