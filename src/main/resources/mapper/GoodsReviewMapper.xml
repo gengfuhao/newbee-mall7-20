@@ -59,6 +59,7 @@
 		#{photo4},#{photo5},#{reviewDate})
 	</insert>
 
+	<!--取review_id最大值，採番用-->
 	<select id="findMaxReviewId" resultType="long">
 		SELECT max(review_id)
 		FROM review
@@ -70,15 +71,27 @@
 		SELECT AVG(rating) AS rating_avg,COUNT(*) AS review_count,
 		COUNT(title) AS title_count
 		FROM review 
-		WHERE proved=0 AND goods_id=#{goodsId};
+		WHERE proved=0 AND goods_id=#{goodsId}
 	</select>
 	
 		<!--取各个rating的数量-->
 	<select id="countReviewsByRating"
-		resultType="int">
-		SELECT COUNT(rating) AS rating_count 
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		SELECT rating,COUNT(rating) AS rating_count 
 		FROM review 
-		WHERE proved=0 AND goods_id=#{goodsId} AND rating=#{rating};
+		WHERE proved=0 AND goods_id=#{goodsId}
+		Group BY rating
+		Order BY rating DESC
+	</select>
+	
+			<!--取各个rating的数量-->
+	<select id="countReviewsHashMap"
+		resultType="hashmap">
+		SELECT rating,COUNT(rating) AS rating_count 
+		FROM review 
+		WHERE proved=0 AND goods_id=#{goodsId}
+		Group BY rating
+		Order BY rating DESC
 	</select>
 	
 

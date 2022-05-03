@@ -6,20 +6,46 @@
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsQuestionAndAnswer">
 		SELECT a.goods_id,question_contents,question_date,
 		answer_contents,answer_date,count(li.user_id) AS count
-		FROM answers as a Join questions as q
+		FROM answers as
+		a Join questions as q
 		ON a.question_id = q.question_id
-		LEFT JOIN qa_like as li
+		LEFT JOIN qa_like
+		as li
 		ON a.answer_id = li.answer_id
 		WHERE a.goods_id = #{goodsId}
-		GROUP BY li.answer_id
+		GROUP
+		BY li.answer_id
 		ORDER BY ${orderByCol} DESC
 		LIMIT #{start},#{number}
 	</select>
 
-	<select id="findGoodsQANumberAndPage" parameterType = "long"
+	<select id="findGoodsQANumberAndPage" parameterType="long"
 		resultType="int">
 		SELECT COUNT(*) AS totalCount
 		FROM answers
-		WHERE goods_id = #{goodsId}
+		WHERE goods_id =
+		#{goodsId}
 	</select>
+
+	<!--question中插入数据 -->
+	<insert id="insertGoodsQuestion">
+		INSERT INTO questions
+		(question_id,user_id,question_date,goods_id,question_contents)
+		VALUES
+		(#{questionId}, #{userId}, #{questionDate}, #{goodsId},
+		#{questionContents})
+	</insert>
+	
+	<!--取question_id最大值，採番用-->
+	<select id="findMaxQuestionId" resultType="long">
+		SELECT max(question_id)
+		FROM questions
+	</select>
+
+	<!--判断qa_like中能否插入数据 -->
+	
+
+	<!--qa_like中插入数据 -->
+
+
 </mapper>

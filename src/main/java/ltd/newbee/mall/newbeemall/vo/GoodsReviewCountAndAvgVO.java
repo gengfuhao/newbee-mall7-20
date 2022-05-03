@@ -1,11 +1,7 @@
 package ltd.newbee.mall.newbeemall.vo;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.annotation.Generated;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 public class GoodsReviewCountAndAvgVO implements Serializable {
 
@@ -14,6 +10,8 @@ public class GoodsReviewCountAndAvgVO implements Serializable {
 	private Integer reviewCount;
 	
 	private Integer titleCount;
+	
+	private List<GoodsReviewCountAndAvgSecondVO> GoodsReviewCountAndAvgSecondVOS;
 
 	public Double getRatingAvg() {
 		return ratingAvg;
@@ -37,6 +35,14 @@ public class GoodsReviewCountAndAvgVO implements Serializable {
 
 	public void setTitleCount(Integer titleCount) {
 		this.titleCount = titleCount;
+	}
+
+	public List<GoodsReviewCountAndAvgSecondVO> getGoodsReviewCountAndAvgSecondVOS() {
+		return GoodsReviewCountAndAvgSecondVOS;
+	}
+
+	public void setGoodsReviewCountAndAvgSecondVOS(List<GoodsReviewCountAndAvgSecondVO> goodsReviewCountAndAvgSecondVOS) {
+		GoodsReviewCountAndAvgSecondVOS = goodsReviewCountAndAvgSecondVOS;
 	}
 
 }

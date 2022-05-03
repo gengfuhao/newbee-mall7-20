@@ -1,12 +1,13 @@
 package ltd.newbee.mall.newbeemall.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import ltd.newbee.mall.newbeemall.dao.GoodsQuestionAndAnswerMapper;
 import ltd.newbee.mall.newbeemall.entity.GoodsQuestionAndAnswer;
@@ -49,5 +50,13 @@ public class GoodsQuestionAndAnswerServiceImpl implements GoodsQuestionAndAnswer
 		voList.add(vo);
 
 		return voList;
+	}
+
+	@Override
+	public int insertGoodsQuestion(Map<String, Object> question) {
+		long newQuestionId=goodsQuestionAndAnswerMapper.findMaxQuestionId()+1;
+		question.replace("questionId", newQuestionId);
+		question.replace("questionDate", new Date());
+		return goodsQuestionAndAnswerMapper.insertGoodsQuestion(question);
 	}
 }
