@@ -63,7 +63,8 @@ public class GoodsDetailController {
 	@GetMapping("/goodsQA")
 	@ResponseBody
 	public Result goodsQA(int pageNo, int number, long goodsId, String orderByCol) {
-		return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo, number, goodsId, orderByCol));
+		return ResultGenerator
+				.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo, number, goodsId, orderByCol));
 	}
 
 	@PostMapping("/goodsQA/insert")
@@ -76,9 +77,33 @@ public class GoodsDetailController {
 			return ResultGenerator.genFailResult("The user ID you entered does not exist!");
 
 		} else {
-			//return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap));
+			// return
+			// ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap));
 			return ResultGenerator.genSuccessResult("Thanks for your question!");
 		}
+	}
+
+	@PostMapping("/goodsQA/insertqaLike")
+	@ResponseBody
+	public Result insertQaLike(@RequestBody HashMap<String, Object> qaLikeMap) {
+		String userId1 = qaLikeMap.get("userId").toString();
+		long userId = Long.parseLong(userId1);
+		MallUser user = checkUserExistsService.checkUserExists(userId);
+
+		String answerId1 = qaLikeMap.get("answerId").toString();
+		long answerId = Long.parseLong(answerId1);
+		int count = goodsQuestionAndAnswerService.checkQaLike(answerId, userId);
+
+		if (user != null) {
+			if (count != 0) {
+				return ResultGenerator.genFailResult("您已经点击过");
+			} else {
+				// ?
+				goodsQuestionAndAnswerService.insertQaLike(qaLikeMap);
+				return ResultGenerator.genSuccessResult("多谢!");
+			}
+		}
+		return ResultGenerator.genFailResult("请先登录！");
 	}
 
 	@GetMapping("/goodsReview")
@@ -110,4 +135,25 @@ public class GoodsDetailController {
 		return ResultGenerator.genSuccessResult(goodsReviewService.getReviewsCountAndAverage(goodsId));
 	}
 
+	@PostMapping("/goodsReview/insertReviewLike")
+	@ResponseBody
+	public Result insertReviewLike(@RequestBody HashMap<String, Object> reviewLikeMap) {
+		String userId1 = reviewLikeMap.get("userId").toString();
+		long userId = Long.parseLong(userId1);
+		MallUser user = checkUserExistsService.checkUserExists(userId);
+
+		String reviewId1 = reviewLikeMap.get("reviewId").toString();
+		long reviewId = Long.parseLong(reviewId1);
+		int count = goodsReviewService.checkReviewLike(reviewId, userId);
+
+		if (user != null) {
+			if (count != 0) {
+				return ResultGenerator.genFailResult("您已经点击过");
+			} else {
+				goodsReviewService.insertReviewLike(reviewLikeMap);
+				return ResultGenerator.genSuccessResult("多谢!");
+			}
+		}
+		return ResultGenerator.genFailResult("请先登录！");
+	}
 }

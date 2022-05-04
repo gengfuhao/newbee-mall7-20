@@ -43,9 +43,19 @@
 	</select>
 
 	<!--判断qa_like中能否插入数据 -->
-	
+	<select id="checkQaLike"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM qa_like
+		WHERE answer_id=#{answerId} AND user_id=#{userId}
+	</select>
 
-	<!--qa_like中插入数据 -->
-
+	<!--qa_like插入数据 -->
+	<insert id="insertQaLike">
+		insert into qa_like
+		(answer_id,user_id,like_date)
+		values
+		(#{answerId},#{userId},#{likeDate})
+	</insert>
 
 </mapper>
