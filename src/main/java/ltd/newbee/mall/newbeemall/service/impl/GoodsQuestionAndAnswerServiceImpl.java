@@ -59,4 +59,16 @@ public class GoodsQuestionAndAnswerServiceImpl implements GoodsQuestionAndAnswer
 		question.replace("questionDate", new Date());
 		return goodsQuestionAndAnswerMapper.insertGoodsQuestion(question);
 	}
+
+	//check and insert qa_like
+	@Override
+	public int checkQaLike(long answerId, long userId) {
+		return goodsQuestionAndAnswerMapper.checkQaLike(answerId, userId);
+	}
+
+	@Override
+	public int insertQaLike(Map<String, Object> qaLike) {
+		qaLike.replace("likeDate", new Date());
+		return goodsQuestionAndAnswerMapper.insertQaLike(qaLike);
+	}
 }

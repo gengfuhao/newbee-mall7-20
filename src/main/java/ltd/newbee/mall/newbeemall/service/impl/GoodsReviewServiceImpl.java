@@ -23,16 +23,15 @@ public class GoodsReviewServiceImpl implements GoodsReviewService {
 
 	@Resource
 	GoodsReviewMapper goodsReviewMapper;
-
+	//task1
 	@Override
 	public List<GoodsReviewVO> getGoodsReview(int rating, long start, long number, long goodsId) {
 
 		List<GoodsReview> entityList = goodsReviewMapper.findGoodsReviewByGoodsId(rating, start, number, goodsId);
 		List<GoodsReviewVO> VoList = BeanUtil.copyList(entityList, GoodsReviewVO.class);
-
 		return VoList;
 	}
-
+	//task2
 	@Override
 	public List<GoodsReview> checkGoodsReview(long goodsId, long userId) {
 		return goodsReviewMapper.checkGoodsReview(goodsId, userId);
@@ -47,7 +46,7 @@ public class GoodsReviewServiceImpl implements GoodsReviewService {
 		review.replace("reviewDate", new Date());
 		return goodsReviewMapper.insertGoodsReview2(review);
 	}
-
+	//task3
 	@Override
 	public GoodsReviewCountAndAvgVO getReviewsCountAndAverage(long goodsId) {
 		List<GoodsReviewCountAndAvg> entityList = new ArrayList<>();
@@ -65,9 +64,18 @@ public class GoodsReviewServiceImpl implements GoodsReviewService {
 		List<GoodsReviewCountAndAvgSecondVO> voList2 = BeanUtil.copyList(entityList2,
 				GoodsReviewCountAndAvgSecondVO.class);
 		vo.setGoodsReviewCountAndAvgSecondVOS(voList2);
-		
 
 		return vo;
+	}
+	//task4
+	@Override
+	public int checkReviewLike(long reviewId, long userId) {
+		return goodsReviewMapper.checkReviewLike(reviewId, userId);
+	}
 
+	@Override
+	public int insertReviewLike(Map<String, Object> reviewLike) {
+		reviewLike.replace("likeDate", new Date());
+		return goodsReviewMapper.insertReviewLike(reviewLike);
 	}
 }
