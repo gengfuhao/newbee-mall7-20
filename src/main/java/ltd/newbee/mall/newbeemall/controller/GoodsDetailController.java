@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ltd.newbee.mall.newbeemall.entity.GoodsReview;
+import ltd.newbee.mall.newbeemall.entity.MallUser;
+import ltd.newbee.mall.newbeemall.service.CheckUserExistsService;
 import ltd.newbee.mall.newbeemall.service.GoodsDetailService;
 import ltd.newbee.mall.newbeemall.service.GoodsImageService;
 import ltd.newbee.mall.newbeemall.service.GoodsInfoService;
@@ -37,6 +39,9 @@ public class GoodsDetailController {
 	@Resource
 	private GoodsReviewService goodsReviewService;
 
+	@Resource
+	private CheckUserExistsService checkUserExistsService;
+
 	@GetMapping("/goodsDetail")
 	@ResponseBody
 	public Result getgoodsDetail(long goodsId) {
@@ -58,14 +63,22 @@ public class GoodsDetailController {
 	@GetMapping("/goodsQA")
 	@ResponseBody
 	public Result goodsQA(int pageNo, int number, long goodsId, String orderByCol) {
-		return ResultGenerator
-				.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo, number, goodsId, orderByCol));
+		return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.getGoodsQA(pageNo, number, goodsId, orderByCol));
 	}
-	
+
 	@PostMapping("/goodsQA/insert")
 	@ResponseBody
 	public Result insertQA(@RequestBody HashMap<String, Object> questionMap) {
-		return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap));
+		String userId1 = questionMap.get("userId").toString();
+		long userId = Long.parseLong(userId1);
+		MallUser user = checkUserExistsService.checkUserExists(userId);
+		if (user == null) {
+			return ResultGenerator.genFailResult("The user ID you entered does not exist!");
+
+		} else {
+			//return ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap));
+			return ResultGenerator.genSuccessResult("Thanks for your question!");
+		}
 	}
 
 	@GetMapping("/goodsReview")
@@ -77,17 +90,17 @@ public class GoodsDetailController {
 	@PostMapping("/goodsReview/insert")
 	@ResponseBody
 	public Result insertReview(@RequestBody HashMap<String, Object> reviewMap) {
-		//Object先转成String，再转成long
+		// Object先转成String，再转成long
 		String goodsId1 = reviewMap.get("goodsId").toString();
 		String userId1 = reviewMap.get("userId").toString();
-		long goodsId=Long.parseLong(goodsId1);
-		long userId=Long.parseLong(userId1);
+		long goodsId = Long.parseLong(goodsId1);
+		long userId = Long.parseLong(userId1);
 		List<GoodsReview> entityList = goodsReviewService.checkGoodsReview(goodsId, userId);
-		
-		if (entityList.size() == 0) {
+
+		if (entityList != null && entityList.size() == 0) {
 			return ResultGenerator.genFailResult("failed");
 		} else {
-			return ResultGenerator.genSuccessResult(goodsReviewService.insertGoodsReview(reviewMap));
+			return ResultGenerator.genSuccessResult(goodsReviewService.insertGoodsReview2(reviewMap));
 		}
 	}
 

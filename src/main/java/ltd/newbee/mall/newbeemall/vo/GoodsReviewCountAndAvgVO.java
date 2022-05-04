@@ -6,11 +6,11 @@ import java.util.List;
 public class GoodsReviewCountAndAvgVO implements Serializable {
 
 	private Double ratingAvg;
-	
+
 	private Integer reviewCount;
-	
+
 	private Integer titleCount;
-	
+
 	private List<GoodsReviewCountAndAvgSecondVO> GoodsReviewCountAndAvgSecondVOS;
 
 	public Double getRatingAvg() {
@@ -41,7 +41,8 @@ public class GoodsReviewCountAndAvgVO implements Serializable {
 		return GoodsReviewCountAndAvgSecondVOS;
 	}
 
-	public void setGoodsReviewCountAndAvgSecondVOS(List<GoodsReviewCountAndAvgSecondVO> goodsReviewCountAndAvgSecondVOS) {
+	public void setGoodsReviewCountAndAvgSecondVOS(
+			List<GoodsReviewCountAndAvgSecondVO> goodsReviewCountAndAvgSecondVOS) {
 		GoodsReviewCountAndAvgSecondVOS = goodsReviewCountAndAvgSecondVOS;
 	}
 

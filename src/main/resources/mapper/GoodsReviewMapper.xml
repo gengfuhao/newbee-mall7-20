@@ -25,7 +25,7 @@
 		LIMIT #{start},#{number}
 	</select>
 
-	<!--判断是否有未评价的订单-->
+	<!--判断是否有未评价的订单 -->
 	<select id="checkGoodsReview"
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
 		SELECT item.order_id,item.goods_id,user_id
@@ -46,7 +46,7 @@
 		ORDER BY o.create_time
 	</select>
 
-	<!--插入数据-->
+	<!--插入数据 -->
 	<insert id="insertGoodsReview">
 		insert into review
 		(review_id,order_id,goods_id,nick_name,
@@ -59,40 +59,134 @@
 		#{photo4},#{photo5},#{reviewDate})
 	</insert>
 
-	<!--取review_id最大值，採番用-->
+	<!--取review_id最大值，採番用 -->
 	<select id="findMaxReviewId" resultType="long">
 		SELECT max(review_id)
 		FROM review
 	</select>
 
- 	<!--取rating平均数，总评价件数，和写评价内容的总件数-->
+	<!--取rating平均数，总评价件数，和写评价内容的总件数 -->
 	<select id="countReviewsAndAverageRating"
-		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
 		SELECT AVG(rating) AS rating_avg,COUNT(*) AS review_count,
 		COUNT(title) AS title_count
-		FROM review 
+		FROM review
 		WHERE proved=0 AND goods_id=#{goodsId}
 	</select>
-	
-		<!--取各个rating的数量-->
+
+	<!--取各个rating的数量 -->
 	<select id="countReviewsByRating"
-		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
-		SELECT rating,COUNT(rating) AS rating_count 
-		FROM review 
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
+		SELECT rating,COUNT(rating) AS rating_count
+		FROM review
 		WHERE proved=0 AND goods_id=#{goodsId}
 		Group BY rating
 		Order BY rating DESC
 	</select>
-	
-			<!--取各个rating的数量-->
-	<select id="countReviewsHashMap"
-		resultType="hashmap">
-		SELECT rating,COUNT(rating) AS rating_count 
-		FROM review 
-		WHERE proved=0 AND goods_id=#{goodsId}
-		Group BY rating
-		Order BY rating DESC
+
+	<!--取各个rating的数量,方法2 -->
+	<select id="countReviewsByRating2"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
+		select distinct
+		(SElECT COUNT(rating) FROM review WHERE rating=5 AND goods_id=#{goodsId}) AS
+		rating5,
+		(SElECT COUNT(rating) FROM review WHERE rating=4 AND goods_id=#{goodsId}) AS
+		rating4,
+		(SElECT COUNT(rating) FROM review WHERE rating=3 AND goods_id=#{goodsId}) AS
+		rating3,
+		(SElECT COUNT(rating) FROM review WHERE rating=2 AND goods_id=#{goodsId}) AS
+		rating2,
+		(SElECT COUNT(rating) FROM review WHERE rating=1 AND goods_id=#{goodsId}) AS
+		rating1
+		FROM review;
 	</select>
-	
+
+
+	<!--插入数据 方法2 -->
+	<insert id="insertGoodsReview2">
+		insert into review
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reviewId != null">
+				review_id,
+			</if>
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="rating != null">
+				rating,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="photo1 != null">
+				photo1,
+			</if>
+			<if test="photo2 != null">
+				photo2,
+			</if>
+			<if test="photo3 != null">
+				photo3,
+			</if>
+			<if test="photo4 != null">
+				photo4,
+			</if>
+			<if test="photo5 != null">
+				photo5,
+			</if>
+			<if test="reviewDate != null">
+				review_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reviewId != null">
+				#{reviewId},
+			</if>
+			<if test="orderId != null">
+				#{orderId},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId},
+			</if>
+			<if test="nickName != null">
+				#{nickName},
+			</if>
+			<if test="rating != null">
+				#{rating},
+			</if>
+			<if test="title != null">
+				#{title},
+			</if>
+			<if test="content != null">
+				#{content},
+			</if>
+			<if test="photo1 != null">
+				#{photo1},
+			</if>
+			<if test="photo2 != null">
+				#{photo2},
+			</if>
+			<if test="photo3 != null">
+				#{photo3},
+			</if>
+			<if test="photo4 != null">
+				#{photo4},
+			</if>
+			<if test="photo5 != null">
+				#{photo5},
+			</if>
+			<if test="reviewDate != null">
+				#{reviewDate},
+			</if>
+		</trim>
+	</insert>
 
 </mapper>

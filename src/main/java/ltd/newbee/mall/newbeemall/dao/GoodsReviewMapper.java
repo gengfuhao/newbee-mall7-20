@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import ltd.newbee.mall.newbeemall.entity.GoodsReview;
+import ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg;
 
 public interface GoodsReviewMapper {
 	//task1 显示review
@@ -12,14 +13,15 @@ public interface GoodsReviewMapper {
 	//task2 check and insert
 	List<GoodsReview> checkGoodsReview(long goodsId, long userId);
 	
-	int insertGoodsReview(Map<String,Object> review);
+	int insertGoodsReview2(Map<String,Object> review);
 	//採番
 	long findMaxReviewId();
 	
 	//task3 一覧
-	List<GoodsReview> countReviewsAndAverageRating(long goodsId);
+	List<GoodsReviewCountAndAvg> countReviewsAndAverageRating(long goodsId);
 	
-	List<GoodsReview> countReviewsByRating(long goodsId);
+	List<GoodsReviewCountAndAvg> countReviewsByRating(long goodsId);
+	
+	List<GoodsReviewCountAndAvg> countReviewsByRating2(long goodsId);
 
-	Map<String,Integer> countReviewsHashMap(Map<String,Integer> map);
 }
