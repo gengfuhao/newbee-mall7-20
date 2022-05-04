@@ -12,11 +12,9 @@ public interface GoodsReviewService {
 	
 	List<GoodsReview> checkGoodsReview(long goodsId, long userId);
 
-	int insertGoodsReview(Map<String,Object> review);
+	int insertGoodsReview2(Map<String,Object> review);
 	
-	List<GoodsReviewCountAndAvgVO> getReviewsCountAndAverage(long goodsId);
+	GoodsReviewCountAndAvgVO getReviewsCountAndAverage(long goodsId);
 	
 	//List<GoodsReview> countReviewsByRating(long goodsId);
-	
-	//Map<String,Integer> countReviewsHashMap(Map<String,Integer> map);
 }
