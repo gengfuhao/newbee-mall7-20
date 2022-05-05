@@ -18,7 +18,8 @@ public interface GoodsReviewMapper {
 	long findMaxReviewId();
 	
 	//task3 一覧
-	List<GoodsReviewCountAndAvg> countReviewsAndAverageRating(long goodsId);
+	GoodsReviewCountAndAvg countReviewsAndAverageRating(long goodsId);
+	//方法１，需要在impl里判断没有评分人数的星级
 	List<GoodsReviewCountAndAvg> countReviewsByRating(long goodsId);
 	//方法２
 	List<GoodsReviewCountAndAvg> countReviewsByRating2(long goodsId);

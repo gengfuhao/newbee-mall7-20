@@ -22,7 +22,7 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 
 	@Override
 	public List<NewBeeMallIndexCategoryVO> getCategoriesForIndex() {
-		// level1 parentId=0,long类型写成0l,且第一个参数是List
+		// level1 parentId=0,long类型写成0l,且第一个参数parentId是List
 		List<Long> parentId = new ArrayList<Long>();
 		parentId.add(0l);
 

@@ -77,9 +77,12 @@ public class GoodsDetailController {
 			return ResultGenerator.genFailResult("The user ID you entered does not exist!");
 
 		} else {
-			// return
-			// ResultGenerator.genSuccessResult(goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap));
-			return ResultGenerator.genSuccessResult("Thanks for your question!");
+			int count=goodsQuestionAndAnswerService.insertGoodsQuestion(questionMap);
+			if(count > 0) {
+			return ResultGenerator.genSuccessResult("sussced!");
+			}else {
+				return ResultGenerator.genFailResult("faild!");
+			}
 		}
 	}
 
@@ -98,9 +101,12 @@ public class GoodsDetailController {
 			if (count != 0) {
 				return ResultGenerator.genFailResult("您已经点击过");
 			} else {
-				// ?
-				goodsQuestionAndAnswerService.insertQaLike(qaLikeMap);
-				return ResultGenerator.genSuccessResult("多谢!");
+				// 判断是否成功插入数据
+				int countInsert = goodsQuestionAndAnswerService.insertQaLike(qaLikeMap);
+				if(countInsert>0) {
+					return ResultGenerator.genSuccessResult("多谢!");
+				}
+				return ResultGenerator.genFailResult("点击失败");
 			}
 		}
 		return ResultGenerator.genFailResult("请先登录！");
@@ -150,8 +156,12 @@ public class GoodsDetailController {
 			if (count != 0) {
 				return ResultGenerator.genFailResult("您已经点击过");
 			} else {
-				goodsReviewService.insertReviewLike(reviewLikeMap);
+				int countInsert= goodsReviewService.insertReviewLike(reviewLikeMap);
+				if(countInsert>0) {
 				return ResultGenerator.genSuccessResult("多谢!");
+				}else{
+					return ResultGenerator.genFailResult("点赞失败");
+				}
 			}
 		}
 		return ResultGenerator.genFailResult("请先登录！");
