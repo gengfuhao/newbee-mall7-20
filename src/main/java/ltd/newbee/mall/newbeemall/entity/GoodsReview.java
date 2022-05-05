@@ -11,7 +11,8 @@ public class GoodsReview {
 	
 	private Integer count;
 	
-
+	private Integer ratingCount;
+	
 	public Long getGoodsId() {
 		return goodsId;
 	}
@@ -35,6 +36,15 @@ public class GoodsReview {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
+
+	public Integer getRatingCount() {
+		return ratingCount;
+	}
+
+	public void setRatingCount(Integer ratingCount) {
+		this.ratingCount = ratingCount;
+	}
+
 
 	@Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-04-28T20:00:59.1301497+09:00", comments="Source field: review.review_id")
 	    private Long reviewId;

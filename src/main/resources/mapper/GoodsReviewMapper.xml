@@ -89,23 +89,15 @@
 	<!--取各个rating的数量,方法2 -->
 	<select id="countReviewsByRating2"
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
-		select distinct
-		(SElECT COUNT(rating) FROM review WHERE
-		rating=5 AND goods_id=#{goodsId}) AS
-		rating5,
-		(SElECT COUNT(rating) FROM
-		review WHERE rating=4 AND goods_id=#{goodsId}) AS
-		rating4,
-		(SElECT
-		COUNT(rating) FROM review WHERE rating=3 AND goods_id=#{goodsId}) AS
-		rating3,
-		(SElECT COUNT(rating) FROM review WHERE rating=2 AND
-		goods_id=#{goodsId}) AS
-		rating2,
-		(SElECT COUNT(rating) FROM review WHERE
-		rating=1 AND goods_id=#{goodsId}) AS
-		rating1
-		FROM review;
+		SElECT 5 AS rating,COUNT(review_id)  AS ratingCount from review WHERE rating=5 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 4,COUNT(review_id) from review WHERE rating=4 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 3,COUNT(review_id) from review WHERE rating=3 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 2,COUNT(review_id) from review WHERE rating=2 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 1,COUNT(review_id) from review WHERE rating=1 AND goods_id=#{goodsId};
 	</select>
 
 
@@ -197,9 +189,9 @@
 	</insert>
 
 	<!--判断是否可以插入review_like -->
-	<select id="checkReviewLike"
-		resultType="int">
-		SELECT COUNT(*) FROM review_like
+	<select id="checkReviewLike" resultType="int">
+		SELECT COUNT(*) FROM
+		review_like
 		WHERE review_id=#{reviewId} AND user_id=#{userId};
 	</select>
 

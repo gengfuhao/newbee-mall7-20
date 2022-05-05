@@ -29,7 +29,7 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
 		
 		for(NewBeeMallGoods e : entityList) {
 			NewBeeMallGoodsDetailVO vo = new NewBeeMallGoodsDetailVO();
-			
+			//entity自动转vo
 			BeanUtil.copyProperties(e, vo);
 			/*
 			 * vo.setGoodsId(null); vo.setGoodsName(null); vo.setGoodsIntro(null);

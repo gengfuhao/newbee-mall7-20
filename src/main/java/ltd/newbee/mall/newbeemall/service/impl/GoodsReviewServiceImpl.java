@@ -49,22 +49,18 @@ public class GoodsReviewServiceImpl implements GoodsReviewService {
 	//task3
 	@Override
 	public GoodsReviewCountAndAvgVO getReviewsCountAndAverage(long goodsId) {
-		List<GoodsReviewCountAndAvg> entityList = new ArrayList<>();
-		entityList = goodsReviewMapper.countReviewsAndAverageRating(goodsId);
-
-		List<GoodsReviewCountAndAvg> entityList2 = new ArrayList<>();
-		entityList2 = goodsReviewMapper.countReviewsByRating2(goodsId);
+		//平均分，总评分件数和总评价内容件数
+		GoodsReviewCountAndAvg entity = goodsReviewMapper.countReviewsAndAverageRating(goodsId);
+		//每个星级的件数
+		List<GoodsReviewCountAndAvg> ratingEntity = goodsReviewMapper.countReviewsByRating2(goodsId);
 
 		// ->vo
 		GoodsReviewCountAndAvgVO vo = new GoodsReviewCountAndAvgVO();
-		for (GoodsReviewCountAndAvg e : entityList) {
-			BeanUtil.copyProperties(e, vo);
-		}
-		
-		List<GoodsReviewCountAndAvgSecondVO> voList2 = BeanUtil.copyList(entityList2,
-				GoodsReviewCountAndAvgSecondVO.class);
-		vo.setGoodsReviewCountAndAvgSecondVOS(voList2);
-
+		BeanUtil.copyProperties(entity, vo);
+		//第二层vo
+		List<GoodsReviewCountAndAvgSecondVO> voList = BeanUtil.copyList(ratingEntity,GoodsReviewCountAndAvgSecondVO.class);
+		vo.setGoodsReviewCountAndAvgSecondVOS(voList);
+	
 		return vo;
 	}
 	//task4

@@ -27,7 +27,6 @@ public class NewBeeMallCheckGoodsServiceImpl implements NewBeeMallCheckGoodsServ
 
 	@Override
 	public List<NewBeeMallGoodsDetailVO> getCheckGoodsesForIndex(long userId, int number) {
-		// TODO 自動生成されたメソッド・スタブ
 		List<NewBeeMallGoodsDetailVO> voList = new ArrayList<>();
 
 		List<CheckGoods> checkGoods = checkGoodsMapper.findCheckGoodsByUserId(userId, 6);
@@ -61,8 +60,6 @@ public class NewBeeMallCheckGoodsServiceImpl implements NewBeeMallCheckGoodsServ
 
 	@Override
 	public List<NewBeeMallGoodsDetailVO> getRescentCheckGoodsesForIndex(long userId, int number) {
-		// TODO 自動生成されたメソッド・スタブ
-
 		List<NewBeeMallGoodsDetailVO> voList = new ArrayList<>();
 
 		List<NewBeeMallGoods> entityList = new ArrayList<>();
