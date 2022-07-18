@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="ltd.newbee.mall.newbeemall.dao.TodoMapper">
+<mapper namespace="ltd.newbee.mall.newbeemall.dao.TodoMapper">
+
+	<!-- get data -->
 	<select id="findTaskByTaskId"
 		resultType="ltd.newbee.mall.newbeemall.entity.Todo">
 		SELECT *
-		FROM todo 
-		WHERE task_id =#{taskId}
+		FROM todo
 	</select>
 
+	<!-- insert data -->
+	<insert id="insertTodo">
+		INSERT INTO todo
+		(task_id,task,date)
+		VALUES
+		(#{taskId},#{task},#{date})
+	</insert>
+
+	<select id="findMaxTaskId" resultType="int">
+		SELECT MAX(task_id)
+		FROM
+		todo
+	</select>
+
+	<!-- update data -->
+	<update id="updateTodo">
+		UPDATE todo SET status=#{status} WHERE task_id=#{taskId}
+	</update>
+	<select id="findUpdatedTodo"
+		resultType="ltd.newbee.mall.newbeemall.entity.Todo">
+		SELECT *
+		FROM todo
+		WHERE task_id=#{taskId}
+	</select>
+	
+	<!-- delete data -->
+	<delete id="deleteTodo">
+	DELETE FROM todo WHERE task_id=#{taskId}
+	</delete>
 </mapper>

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TodoVO implements Serializable{
 	 @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2943406+09:00", comments="Source field: todo.task_id")
 	    private Integer taskId;
@@ -12,8 +14,11 @@ public class TodoVO implements Serializable{
 	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.task")
 	    private String task;
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
-	    private Date data;
+//	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
+//	    private Date data;
+	    
+	    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
+		private Date date;
 
 	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.status")
 	    private Integer status;
@@ -38,16 +43,24 @@ public class TodoVO implements Serializable{
 	        this.task = task == null ? null : task.trim();
 	    }
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
-	    public Date getData() {
-	        return data;
-	    }
+//	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
+//	    public Date getData() {
+//	        return data;
+//	    }
+//
+//	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
+//	    public void setData(Date data) {
+//	        this.data = data;
+//	    }
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2963362+09:00", comments="Source field: todo.data")
-	    public void setData(Date data) {
-	        this.data = data;
-	    }
+		public Date getDate() {
+			return date;
+		}
 
+		public void setDate(Date date) {
+			this.date = date;
+		}
+	    
 	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-18T08:59:37.2973328+09:00", comments="Source field: todo.status")
 	    public Integer getStatus() {
 	        return status;
