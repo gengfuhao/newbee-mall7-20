@@ -25,17 +25,18 @@ class NewbeeMallApplicationTests {
 	
 	@Resource
 	GoodsReviewService goodsReviewService;
-	/*
-	 * @Test void contextLoads() {
-	 * 
-	 * List<RunRecommendApiHistory> list = new ArrayList<>();
-	 * RunRecommendApiHistory h1 = new RunRecommendApiHistory(); 
-	 * h1.setUserId(1); h1.setCategoryId(0);
-	 * h1.setRunDate(new Date()); list.add(h1);
-	 * 
-	 * int cnt = runRecommendApiHistoryService.insertRunRecommendApiHistory(list);
-	 * assertEquals(1,cnt); }
-	 */
+	
+	  @Test void contextLoads() {
+	  
+	  List<RunRecommendApiHistory> list = new ArrayList<>();
+	  RunRecommendApiHistory h1 = new RunRecommendApiHistory(); 
+	  h1.setUserId(1); h1.setCategoryId(0);
+	  h1.setRunDate(new Date()); list.add(h1);
+	  
+	  int cnt = runRecommendApiHistoryService.insertRunRecommendApiHistory(list);
+	  assertEquals(1,cnt); 
+	  }
+	 
 	 
 	
 	/*
